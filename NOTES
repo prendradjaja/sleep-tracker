@@ -1,0 +1,10 @@
+PART I: MORNING TRACKER
+- an "i'm awake" button
+- show data from past days
+- don't build til you need it: what if i fall asleep after pressing "i'm awake"
+
+wake_time table:
+  date TEXT (e.g. "2020-06-08")
+  wake_time TEXT (e.g. "9:00" or "13:00")
+
+PART II: NIGHT TRACKER
