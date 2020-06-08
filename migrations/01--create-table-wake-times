@@ -1,0 +1,4 @@
+CREATE TABLE wake_times (
+  date TEXT,
+  time TEXT
+);
