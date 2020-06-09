@@ -35,5 +35,6 @@ function pushWakeTime() {
     .then(() => {
       // TODO error handling
       pushingIndicator.innerText += ' Done.';
+      refreshDisplay();
     });
 }
