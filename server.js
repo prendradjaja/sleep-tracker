@@ -5,7 +5,7 @@ const DB_PATH = './database/sqlite3';
 
 const db = new sqlite3.Database(DB_PATH, startApp);
 
-function startApp() {
+async function startApp() {
   const app = express();
   const PORT = process.env.PORT || 4001;
 
@@ -19,7 +19,8 @@ function startApp() {
    *   { date: "2020-01-02", "13:00" }
    * ]
    */
-  app.get('/api/wake_times', (req, res) => {
+  app.get('/api/wake_times', async (req, res) => {
+    await fakeNetworkDelay();
     db.all('SELECT date, time FROM wake_times;', (err, rows) => {
       res.send(rows);
       // TODO error handling
@@ -29,7 +30,8 @@ function startApp() {
   /**
    * Adds or updates today's wake_times entry to the current time
    */
-  app.put('/api/wake_times/now', (req, res) => {
+  app.put('/api/wake_times/now', async (req, res) => {
+    await fakeNetworkDelay();
     const date = getDate();
     const time = getTime();
     // Don't do interpolation like this with user-provided data!
@@ -70,4 +72,12 @@ function getTime() {
     .toString()
     .padStart(2, '0');
   return `${hours}:${minutes}`;
+}
+
+function fakeNetworkDelay() {
+  return wait(500);
+}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
